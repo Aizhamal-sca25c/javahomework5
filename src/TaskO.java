@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 
 public class TaskO {
@@ -14,20 +13,37 @@ public class TaskO {
 
         int count = 0;
 
-        for (int i = 0; i < n; ) {
-            int j = i;
+        while (true) {
+            boolean removed = false;
 
-            while (j < n && arr[i] == arr[j]) {
-                j++;
+            for (int i = 0; i < n; ) {
+                int j = i;
+
+                while (j < n && arr[i] == arr[j]) {
+                    j++;
+                }
+
+                if (j - i >= 3) {
+                    count += j - i;
+
+                    for (int k = j; k < n; k++) {
+                        arr[k - (j - i)] = arr[k];
+                    }
+
+                    n -= j - i;
+                    removed = true;
+                    break;
+                }
+
+                i = j;
             }
 
-            if (j - i >= 3) {
-                count += j - i;
+            if (!removed) {
+                break;
             }
-
-            i = j;
         }
 
         System.out.println(count);
     }
 }
+
